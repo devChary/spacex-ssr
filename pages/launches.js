@@ -27,7 +27,9 @@ export default function Launches({ data, queryParams }) {
             if (queryParams.land_success) {
                 setLandSuccess(queryParams.land_success)
             }
-            window.history.pushState({}, '', `http://localhost:3000/launches${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
+            if (window) {
+                window.history.pushState({}, '', `http://localhost:3000/launches${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
+            }
         }
     }, [])
 
