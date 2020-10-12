@@ -7,7 +7,7 @@ import Footer from './components/footer'
 
 let API_URL = `https://api.spacexdata.com/v3/launches?limit=100`;
 
-export default function Launches({ data, queryParams }) {
+export default function Home({ data, queryParams }) {
 
   const [missions, setMissions] = useState([]);
   const [launchYear, setLaunchYear] = useState('');
@@ -28,7 +28,7 @@ export default function Launches({ data, queryParams }) {
         setLandSuccess(queryParams.land_success)
       }
       if (window) {
-        window.history.pushState({}, '', `https://spacex-ssr.vercel.app/launches${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
+        window.history.pushState({}, '', `https://spacex-ssr.vercel.app/${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
       }
     }
   }, [])
@@ -63,7 +63,10 @@ export default function Launches({ data, queryParams }) {
 
   const updateUrl = () => {
     API_URL = `https://api.spacexdata.com/v3/launches?limit=100${launchYear ? `&launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`;
-    window.history.pushState({}, '', `https://spacex-ssr.vercel.app/launches${launchYear ? `?launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`)
+    if (window) {
+      window.history.pushState({}, '', `https://spacex-ssr.vercel.app/${launchYear ? `?launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`)
+    }
+
   }
 
   return (
