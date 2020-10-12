@@ -4,7 +4,7 @@ const MissonDetails = ({ mission }) => {
     return (
         <div className={styles.missionWrapper}>
             <div className={styles.imgContainer}>
-                <img className={styles.img} src={mission && mission.links ? mission.links.mission_patch_small : ''} />
+                <img alt={mission ? mission.mission_name: 'SpaceX missions'} className={styles.img} src={mission && mission.links ? mission.links.mission_patch_small : ''} />
             </div>
             <div className="details">
                 <h4 className={styles.blueTag}>{mission ? mission.mission_name: ''} #{mission ? mission.flight_number: ''}</h4>
