@@ -1,3 +1,4 @@
+import { Html, Head } from 'next/document';
 import { useState, useLayoutEffect, useRef, useEffect } from 'react';
 
 import Filters from './components/filters';
@@ -71,12 +72,20 @@ export default function Home({ data, queryParams }) {
 
   return (
     <>
-      <header className={styles.launchTitle}>Space X Launch Programs</header>
-      <div className={styles.wrapper}>
-        <Filters setParams={setParams} launchSuccess={launchSuccess} launchYear={launchYear} landSuccess={landSuccess} />
-        <MissonList missions={missions} />
-      </div>
-      <Footer />
+      <Html lang="en">
+        <Head>
+          <title>SpaceX Launches</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="description" content="SpaceX Launches" />
+        </Head>
+        <header className={styles.launchTitle}>Space X Launch Programs</header>
+        <div className={styles.wrapper}>
+          <Filters setParams={setParams} launchSuccess={launchSuccess} launchYear={launchYear} landSuccess={landSuccess} />
+          <MissonList missions={missions} />
+        </div>
+        <Footer />
+      </Html>
+
     </>
   )
 }

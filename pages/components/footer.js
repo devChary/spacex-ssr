@@ -1,6 +1,6 @@
 const Footer = () => (
     <footer style={{textAlign: 'center'}}>
-        <p>Developer Name: <span>Space X</span></p>
+        <p>Developer Name: <span style={{color: '#4A5098'}}>Peddinti Jagannadh Achary</span></p>
     </footer>
 )
 
