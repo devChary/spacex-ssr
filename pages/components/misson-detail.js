@@ -13,7 +13,7 @@ const MissonDetails = ({ misson: { mission_name, flight_number, mission_id, laun
                     <div>
                         <span className={styles.textBold}>Misson Ids: </span>
                         <span className={styles.blueTag}>
-                            <ul style={{lineHeight: '5px'}}>
+                            <ul>
                                 {
                                     mission_id.map(id => (<li key={id} className="">{id}</li>))
                                 }

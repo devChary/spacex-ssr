@@ -1,6 +1,6 @@
 import styles from '../../../styles/Filters.module.css'
 
-const LaunchYear = ({ setParams }) => {
+const LaunchYear = ({ setParams, launchYear }) => {
     const yearsList = [
         { label: '2006', _id: 1 },
         { label: '2007', _id: 2 },
@@ -32,7 +32,7 @@ const LaunchYear = ({ setParams }) => {
                 {
                     yearsList.map(year => (
                         <div key={year._id} className={styles.btnContainer}>
-                            <button onClick={() => selectedYear(year.label)}>{year.label}</button>
+                            <button className={year.label === launchYear ? `${styles.button} ${styles.selected}` : styles.button} onClick={() => selectedYear(year.label)}>{year.label}</button>
                         </div>
                     ))
                 }
