@@ -1,65 +1,95 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState, useLayoutEffect, useRef, useEffect } from 'react';
 
-export default function Home() {
+import Filters from './components/filters';
+import MissonList from './components/misson-list';
+import styles from '../styles/Launch.module.css'
+import Footer from './components/footer'
+
+let API_URL = `https://api.spacexdata.com/v3/launches?limit=100`;
+
+export default function Launches({ data, queryParams }) {
+
+  const [missions, setMissions] = useState([]);
+  const [launchYear, setLaunchYear] = useState('');
+  const [launchSuccess, setLaunchSuccess] = useState('false');
+  const [landSuccess, setLandSuccess] = useState('false');
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (queryParams) {
+      if (queryParams.launch_year) {
+        setLaunchYear(queryParams.launch_year)
+      }
+      if (queryParams.launch_success) {
+        setLaunchSuccess(queryParams.launch_success)
+      }
+      if (queryParams.land_success) {
+        setLandSuccess(queryParams.land_success)
+      }
+      if (window) {
+        window.history.pushState({}, '', `https://spacex-ssr.vercel.app/launches${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    setMissions(data);
+  }, [data])
+
+  useLayoutEffect(() => {
+    updateUrl();
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    async function fetchData() {
+      const missionsDetails = await getMissonDetails(null);
+      setMissions(missionsDetails.props.data)
+    }
+
+    fetchData();
+  }, [launchYear, launchSuccess, landSuccess])
+
+  const setParams = (type, value) => {
+    if (type === 'year') {
+      setLaunchYear(value)
+    } else if (type === 'land') {
+      setLandSuccess(`${value}`)
+    } else if (type === 'launch') {
+      setLaunchSuccess(`${value}`)
+    }
+  }
+
+  const updateUrl = () => {
+    API_URL = `https://api.spacexdata.com/v3/launches?limit=100${launchYear ? `&launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`;
+    window.history.pushState({}, '', `https://spacex-ssr.vercel.app/launches${launchYear ? `?launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`)
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <>
+      <header className={styles.launchTitle}>Space X Launch Programs</header>
+      <div className={styles.wrapper}>
+        <Filters setParams={setParams} launchSuccess={launchSuccess} launchYear={launchYear} landSuccess={landSuccess} />
+        <MissonList missions={missions} />
+      </div>
+      <Footer />
+    </>
   )
+}
+
+const getMissonDetails = async (queryParams) => {
+  if (queryParams) {
+    API_URL = `https://api.spacexdata.com/v3/launches?limit=100${queryParams.launch_year ? `&launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? ` &land_success=${queryParams.land_success}` : ''}`;
+  }
+  const res = await fetch(`${API_URL}`);
+  const data = await res.json();
+
+  return {
+    props: { data, queryParams }
+  }
+}
+
+export async function getServerSideProps(context) {
+  return getMissonDetails(context.query)
 }
