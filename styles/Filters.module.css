@@ -1,0 +1,46 @@
+.filters {
+  margin: 0px 10px;
+}
+
+.filterWrapper {
+  width: 15vw;
+  display: flex;
+  background-color: #fff;
+  margin: 0px 10px 0px 0px;
+  border-radius: 5px;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.filterTags {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.btnList > .btnContainer {
+    padding: 8px;
+    text-align: center;
+}
+
+.btnList {
+    grid-template-columns: 50% auto;
+    display: grid;
+}
+
+.btnContainer > button {
+    background-color: #C5E09A;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btnContainer > button:hover {
+    background-color: #7BBA01;
+}
+
+.btnContainer > button:focus {
+    background-color: #7BBA01;
+    border: none;
+    outline: #7BBA01;
+}

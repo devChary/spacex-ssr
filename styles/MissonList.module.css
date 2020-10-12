@@ -1,0 +1,9 @@
+.missionList {
+  width: 80vw;
+  justify-items: center;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+  grid-auto-rows: 6;
+  grid-gap: 15px;
+}
