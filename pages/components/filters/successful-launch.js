@@ -1,7 +1,6 @@
 import styles from '../../../styles/Filters.module.css'
 
 const SuccessfulLaunch = ({ setParams, launchSuccess }) => {
-    debugger
     const onLaunch = (val) => {
         setParams('launch', val)
     }

@@ -6,7 +6,8 @@ const MissonList = ({ missions }) => {
         <div className={styles.missionList}>
             {
                 missions && missions.map((mission) => (
-                    <MissonDetails key={mission.flight_number} misson={mission ? mission: {}} />)
+                    mission ?
+                        <MissonDetails key={mission.flight_number} misson={mission ? mission : {}} /> : '')
                 )
             }
 
