@@ -4,15 +4,15 @@ import SuccessfulLanding from './filters/successful-landing';
 
 import styles from '../../styles/Filters.module.css'
 
-const Filters = () => (
+const Filters = ({ setParams }) => (
     <aside className={styles.filterWrapper}>
         <h4>Filters</h4>
         <div className={styles.filters}>
-            <LaunchYear />
+            <LaunchYear setParams={setParams} />
             <br />
-            <SuccessfulLaunch />
+            <SuccessfulLaunch setParams={setParams} />
             <br />
-            <SuccessfulLanding />
+            <SuccessfulLanding setParams={setParams} />
         </div>
 
     </aside>

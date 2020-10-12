@@ -1,9 +1,9 @@
 import styles from '../../../styles/Filters.module.css'
 
-const SuccessfulLanding = () => {
+const SuccessfulLanding = ({ setParams }) => {
 
     const onLanding = (val) => {
-        console.log('Landing', val);
+        setParams('land', val)
     }
 
     return (

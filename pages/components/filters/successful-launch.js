@@ -1,9 +1,9 @@
 import styles from '../../../styles/Filters.module.css'
 
-const SuccessfulLaunch = () => {
+const SuccessfulLaunch = ({ setParams }) => {
 
     const onLaunch = (val) => {
-        console.log('Launch', val);
+        setParams('launch', val)
     }
     return (
         <>
