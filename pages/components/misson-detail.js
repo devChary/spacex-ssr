@@ -1,13 +1,13 @@
 import styles from '../../styles/MissonDetails.module.css'
 
-const MissonDetails = ({ misson: { mission_name, flight_number, mission_id, launch_year, launch_success, is_tentative, links: { mission_patch_small } } }) => {
+const MissonDetails = ({ mission }) => {
     return (
         <div className={styles.missionWrapper}>
             <div className={styles.imgContainer}>
-                <img className={styles.img} src={mission_patch_small} />
+                <img className={styles.img} src={mission && mission.links ? mission.links.mission_patch_small : ''} />
             </div>
             <div className="details">
-                <h4 className={styles.blueTag}>{mission_name} #{flight_number}</h4>
+                <h4 className={styles.blueTag}>{mission ? mission.mission_name: ''} #{mission ? mission.flight_number: ''}</h4>
 
                 <div className="misson-ids">
                     <div>
@@ -15,7 +15,7 @@ const MissonDetails = ({ misson: { mission_name, flight_number, mission_id, laun
                         <span className={styles.blueTag}>
                             <ul>
                                 {
-                                    mission_id.map(id => (<li key={id} className="">{id}</li>))
+                                    mission ? mission.mission_id.map(id => (<li key={id} className="">{id}</li>)): null
                                 }
                             </ul>
                         </span>
@@ -23,15 +23,15 @@ const MissonDetails = ({ misson: { mission_name, flight_number, mission_id, laun
                 </div>
                 <div className="misson-tag">
                     <span className={styles.textBold}>Launch Year: </span>
-                    <span className={styles.blueTag}>{launch_year}</span>
+                    <span className={styles.blueTag}>{mission ? mission.launch_year: ''}</span>
                 </div>
                 <div className="misson-tag">
                     <span className={styles.textBold}>Successful Launch: </span>
-                    <span className={styles.blueTag}>{`${launch_success}`}</span>
+                    <span className={styles.blueTag}>{`${mission ? mission.launch_success: ''}`}</span>
                 </div>
                 <div className="misson-tag">
                     <span className={styles.textBold}>Is Tentative: </span>
-                    <span className={styles.blueTag}>{`${is_tentative}`}</span>
+                    <span className={styles.blueTag}>{`${mission ? mission.is_tentative: ''}`}</span>
                 </div>
             </div>
         </div >
