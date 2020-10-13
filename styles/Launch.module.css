@@ -1,11 +1,34 @@
 .wrapper {
-    display: grid;
-    grid-template-columns: 15% 85%;
+  display: flex;
+  /* grid-template-columns: 15% 85%; */
 }
 
 .launchTitle {
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 30px;
-    margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 700px) {
+  .wrapper {
+    display: block;
+  }
+}
+
+.footer {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: 700px) and (max-width: 1024px) {
+  .footer {
+    text-align: center;
+    position: fixed;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }

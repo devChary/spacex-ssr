@@ -12,8 +12,8 @@ export default function Home({ data, queryParams }) {
 
   const [missions, setMissions] = useState([]);
   const [launchYear, setLaunchYear] = useState('');
-  const [launchSuccess, setLaunchSuccess] = useState('false');
-  const [landSuccess, setLandSuccess] = useState('false');
+  const [launchSuccess, setLaunchSuccess] = useState('true');
+  const [landSuccess, setLandSuccess] = useState('true');
 
   const initialRender = useRef(true);
 
@@ -91,12 +91,18 @@ const getMissonDetails = async (queryParams) => {
   if (queryParams) {
     API_URL = `https://api.spacexdata.com/v3/launches?limit=100${queryParams.launch_year ? `&launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? ` &land_success=${queryParams.land_success}` : ''}`;
   }
-  const res = await fetch(`${API_URL}`);
-  const data = await res.json();
 
-  return {
-    props: { data, queryParams }
+  try {
+    const res = await fetch(`${API_URL}`);
+    const data = await res.json();
+
+    return {
+      props: { data, queryParams }
+    }
+  } catch (e) {
+    console.log(`Some error occurred`);
   }
+
 }
 
 export async function getServerSideProps(context) {

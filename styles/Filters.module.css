@@ -47,3 +47,30 @@
   border: none;
   outline: #7bba01;
 }
+
+@media only screen and (max-width: 700px) {
+  .filterWrapper {
+    width: 100% !important;
+    margin-bottom: 10px;
+    max-height: none;
+  }
+
+  .button {
+    padding: 5px 20px;
+    font-size: 20px;
+  }
+
+  .filterTags {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1024px) {
+  .button {
+    padding: 3px 10px;
+  }
+
+  .filterWrapper {
+    width: 20vw;
+  }
+}

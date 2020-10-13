@@ -21,15 +21,33 @@
 }
 
 .img {
-    width: 15em;
-    height: 15em;
+  width: 15em;
+  height: 15em;
 }
 
 .blueTag {
-    color: #4A5098;
+  color: #4a5098;
 }
 
 .textBold {
-    font-weight: bold;
-    line-height: 25px;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+@media only screen and (max-width: 700px) {
+  .missionList {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .missionWrapper {
+    width: 100%;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 700px) {
+  .missionWrapper {
+    width: 100%;
+  }
 }
