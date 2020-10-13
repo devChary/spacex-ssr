@@ -1,8 +1,10 @@
-import styles from '../../styles/Launch.module.css'
+import styles from '../../styles/MissonDetails.module.css'
 
 const Footer = () => (
-    <footer className={styles.footer}>
-        <p>Developer Name: <span style={{color: '#4A5098'}}>Peddinti Jagannadh Achary</span></p>
+    <footer style={{ textAlign: 'center', margin: '25px 0px' }}>
+        <p>
+            <span style={{ fontSize: '20px', fontWeight: 'bold' }}>Developer Name:</span>
+            <span style={{ fontSize: '20px' }} > Peddinti Jagannadh Achary</span></p>
     </footer>
 )
 

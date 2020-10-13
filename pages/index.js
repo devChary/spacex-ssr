@@ -12,8 +12,8 @@ export default function Home({ data, queryParams }) {
 
   const [missions, setMissions] = useState([]);
   const [launchYear, setLaunchYear] = useState('');
-  const [launchSuccess, setLaunchSuccess] = useState('true');
-  const [landSuccess, setLandSuccess] = useState('true');
+  const [launchSuccess, setLaunchSuccess] = useState('');
+  const [landSuccess, setLandSuccess] = useState('');
 
   const initialRender = useRef(true);
 
@@ -29,7 +29,7 @@ export default function Home({ data, queryParams }) {
         setLandSuccess(queryParams.land_success)
       }
       if (window) {
-        window.history.pushState({}, '', `https://spacex-ssr.vercel.app/${queryParams.launch_year ? `?launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? `&land_success=${queryParams.land_success}` : ''}`)
+        window.history.pushState({}, '', `https://spacex-ssr.vercel.app/${launchYear ? `?launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`)
       }
     }
   }, [])
@@ -45,8 +45,12 @@ export default function Home({ data, queryParams }) {
       return;
     }
     async function fetchData() {
-      const missionsDetails = await getMissonDetails(null);
-      setMissions(missionsDetails.props.data)
+      try {
+        const missionsDetails = await getMissonDetails(null);
+        setMissions(missionsDetails.props.data)
+      } catch (e) {
+        console.log('Some error occured');
+      }
     }
 
     fetchData();
@@ -67,7 +71,6 @@ export default function Home({ data, queryParams }) {
     if (window) {
       window.history.pushState({}, '', `https://spacex-ssr.vercel.app/${launchYear ? `?launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`)
     }
-
   }
 
   return (
@@ -80,7 +83,9 @@ export default function Home({ data, queryParams }) {
       <header className={styles.launchTitle}>Space X Launch Programs</header>
       <div className={styles.wrapper}>
         <Filters setParams={setParams} launchSuccess={launchSuccess} launchYear={launchYear} landSuccess={landSuccess} />
-        <MissonList missions={missions} />
+        {
+          missions && missions.length ? <MissonList missions={missions} /> : <div style={{ textAlign: 'center', fontSize: '24px', marginTop: '20px' }}>No results to display</div>
+        }
       </div>
       <Footer />
     </>

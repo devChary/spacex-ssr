@@ -1,7 +1,6 @@
 import styles from '../../../styles/Filters.module.css'
 
 const SuccessfulLanding = ({ setParams, landSuccess }) => {
-    console.log(landSuccess)
     const onLanding = (val) => {
         setParams('land', val)
     }
