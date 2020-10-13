@@ -38,4 +38,4 @@ It is deployed on vercel with a CI/CD pipeline
 window.pushState() is used to update the queryParams when filters are used and by checking those queryParams we persist state when page is refreshed with them.
 
 ## Lighthouse Score
-![Alt text](../../Interview/sapient/public/lighthouse.PNG?raw=true "Lighthouse Score")
+![Alt text](https://github.com/devChary/spacex-ssr/blob/master/public/lighthouse.PNG?raw=true "Lighthouse Score")
