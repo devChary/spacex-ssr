@@ -7,11 +7,11 @@ const MissonList = ({ missions }) => {
             {
                 missions && missions.map((mission) => (
                     mission ?
-                        <MissonDetails key={mission.flight_number} mission={mission} /> : "No results to display")
+                        <MissonDetails key={mission.flight_number} mission={mission} /> : null)
                 )
             }
-
         </div>
+
 
     )
 }

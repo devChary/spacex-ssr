@@ -32,7 +32,7 @@ const LaunchYear = ({ setParams, launchYear }) => {
                 {
                     yearsList.map(year => (
                         <div key={year._id} className={styles.btnContainer}>
-                            <button className={year.label === launchYear ? `${styles.button} ${styles.selected}` : styles.button} onClick={() => selectedYear(year.label)}>{year.label}</button>
+                            <button className={(year.label === launchYear) && `${styles.selected}` ? `${styles.button} ${styles.selected}` : styles.button} onClick={() => selectedYear(year.label)}>{year.label}</button>
                         </div>
                     ))
                 }

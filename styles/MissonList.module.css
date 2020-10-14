@@ -1,9 +1,9 @@
 .missionList {
   width: 80vw;
-  justify-items: center;
+  justify-content: center;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
   grid-template-rows: repeat(auto-fill, minmax(300px, 500px));
   grid-gap: 15px;
 }
@@ -11,6 +11,18 @@
 @media only screen and (max-width: 700px) {
   .missionList {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1267px) {
+  .missionList {
+    grid-template-columns: repeat(auto-fit, minmax(190px, max-content));
+  }
+}
+
+@media (min-width: 1268px) and (max-width: 1315px) {
+  .missionList {
+    grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
   }
 }
