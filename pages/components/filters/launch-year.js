@@ -21,7 +21,11 @@ const LaunchYear = ({ setParams, launchYear }) => {
 
     // Fn: takes the id of the year selected and sets the route and makes the API call.
     const selectedYear = (label) => {
-        setParams('year', label)
+        if (launchYear !== label) {
+            setParams('year', label)
+        } else {
+            setParams('year', '')
+        }
     }
 
     return (
@@ -32,7 +36,7 @@ const LaunchYear = ({ setParams, launchYear }) => {
                 {
                     yearsList.map(year => (
                         <div key={year._id} className={styles.btnContainer}>
-                            <button className={(year.label === launchYear) && `${styles.selected}` ? `${styles.button} ${styles.selected}` : styles.button} onClick={() => selectedYear(year.label)}>{year.label}</button>
+                            <button className={(year.label === launchYear) ? `${styles.button} ${styles.selected}` : styles.button} onClick={() => selectedYear(year.label)}>{year.label}</button>
                         </div>
                     ))
                 }
