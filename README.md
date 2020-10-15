@@ -35,7 +35,25 @@ This application uses next js to render the application server side initially an
 
 It is deployed on vercel with a CI/CD pipeline
 
-window.pushState() is used to update the queryParams when filters are used and by checking those queryParams we persist state when page is refreshed with them.
+window.pushState() is used to update the queryParams in the URL when filters are applied and by checking those queryParams we persist state when page is refreshed.
+
+## Folder Structure
+<!-- Folder structure explained -->
+Pages is the top level folder which contains the pages we are using - In our case there is only one page index.js
+Components folder contains all components which are used to build the app
+1. index.js - The top level component which renders the page with filters and the Missons
+
+2. filters.js - contains all different filters like Launch Year and Successful Landing and Successful launch which receive a fn from the the top level component to set values | update url | make API call
+PS: The individual filters are inside filters folder
+
+3. MissionList - It receives the missions from the parent and maps them.
+
+4. MissionDetail - It contains the details of each mission card and is a stateless or dumb component.
+
+## Style Guide
+<!-- Styles -->
+The styles are used in CSS Modules and each component has their styles own style module. 
+When using CSS Modules - styles are imported by an alias name and are accessed as objects.
 
 ## Lighthouse Score
 ![Alt text](https://github.com/devChary/spacex-ssr/blob/master/public/lighthouse.PNG?raw=true "Lighthouse Score")

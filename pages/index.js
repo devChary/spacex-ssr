@@ -38,6 +38,9 @@ export default function Home({ data, queryParams }) {
     setMissions(data);
   }, [data])
 
+  // This fn initially checks the query params and updates the url
+  // Checks if it's a initial render if yes, it renders serverside else fetches data from the API.
+  // It depends on changes in launchYear, launchSuccess and landSuccess variables from params
   useLayoutEffect(() => {
     updateUrl();
     if (initialRender.current) {
@@ -56,6 +59,7 @@ export default function Home({ data, queryParams }) {
     fetchData();
   }, [launchYear, launchSuccess, landSuccess])
 
+  // Receives the value from the filter and sets the particular param value accordingly
   const setParams = (type, value) => {
     if (type === 'year') {
       setLaunchYear(value)
@@ -66,6 +70,7 @@ export default function Home({ data, queryParams }) {
     }
   }
 
+  // Updates the Url for API call and page Url
   const updateUrl = () => {
     API_URL = `https://api.spacexdata.com/v3/launches?limit=100${launchYear ? `&launch_year=${launchYear}` : ''}${launchSuccess ? `&launch_success=${launchSuccess}` : ''}${landSuccess ? `&land_success=${landSuccess}` : ''}`;
     if (window) {
@@ -95,6 +100,7 @@ export default function Home({ data, queryParams }) {
   )
 }
 
+// If queryParams are present they are appended else API is called without any
 const getMissonDetails = async (queryParams) => {
   if (queryParams) {
     API_URL = `https://api.spacexdata.com/v3/launches?limit=100${queryParams.launch_year ? `&launch_year=${queryParams.launch_year}` : ''}${queryParams.launch_success ? `&launch_success=${queryParams.launch_success}` : ''}${queryParams.land_success ? ` &land_success=${queryParams.land_success}` : ''}`;

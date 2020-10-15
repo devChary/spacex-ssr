@@ -19,7 +19,7 @@ const LaunchYear = ({ setParams, launchYear }) => {
         { label: '2020', _id: 15 }
     ]
 
-    // Fn: takes the id of the year selected and sets the route and makes the API call.
+    // Fn: takes the id of the year selected, sets the route and makes the API call.
     const selectedYear = (label) => {
         if (launchYear !== label) {
             setParams('year', label)

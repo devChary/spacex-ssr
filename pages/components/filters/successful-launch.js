@@ -8,6 +8,7 @@ const SuccessfulLaunch = ({ setParams, launchSuccess }) => {
             setParams('launch', '')
         }
     }
+    
     return (
         <>
             <p className={styles.filterTags}>Successful Launch</p>

@@ -11,8 +11,6 @@ const MissonList = ({ missions }) => {
                 )
             }
         </div>
-
-
     )
 }
 

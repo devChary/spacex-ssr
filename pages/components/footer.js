@@ -1,5 +1,3 @@
-import styles from '../../styles/MissonDetails.module.css'
-
 const Footer = () => (
     <footer style={{ textAlign: 'center', margin: '25px 0px' }}>
         <p>
