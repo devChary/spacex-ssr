@@ -3,7 +3,8 @@
 }
 
 .filterWrapper {
-  width: 15vw;
+  width: 20vw;
+  max-width: 240px;
   height: 100%;
   max-height: 700px;
   display: flex;
@@ -51,6 +52,7 @@
 @media only screen and (max-width: 700px) {
   .filterWrapper {
     width: 100% !important;
+    max-width: none;
     margin-bottom: 10px;
     max-height: none;
   }

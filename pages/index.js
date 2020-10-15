@@ -84,7 +84,10 @@ export default function Home({ data, queryParams }) {
       <div className={styles.wrapper}>
         <Filters setParams={setParams} launchSuccess={launchSuccess} launchYear={launchYear} landSuccess={landSuccess} />
         {
-          missions && missions.length ? <MissonList missions={missions} /> : <div style={{ textAlign: 'center', fontSize: '24px', marginTop: '20px' }}>No results to display</div>
+          missions && missions.length ? <MissonList missions={missions} /> :
+            <div style={{ textAlign: 'center', fontSize: '24px', marginTop: '20px' }}>
+              <h2>No results to display!</h2>
+            </div>
         }
       </div>
       <Footer />
